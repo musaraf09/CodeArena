@@ -2,7 +2,7 @@
 
 A modern coding problem-solving platform designed to help developers practice programming, improve their problem-solving skills, and become better programmers.
 
-🌐 Live Website: "Visit CodeArena" (YOUR_VERCEL_WEBSITE_URL)
+🌐 Live Website: "Visit CodeArena" (https://v0-codearena-beta.vercel.app/)
 
 ---
 
