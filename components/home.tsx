@@ -1,13 +1,329 @@
-import Link from 'next/link'
-import { ArrowRight, ArrowUpRight, Braces, Check, ChevronRight, Code2, GitBranch, Layers3, ListTree, Play, Sparkles, Target, Terminal, Trophy, Users, Zap } from 'lucide-react'
-import problems from '@/lib/problems.json'
-import { ProblemCard } from './problem-card'
+import Link from "next/link";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Braces,
+  Check,
+  ChevronRight,
+  Code2,
+  GitBranch,
+  Layers3,
+  ListTree,
+  Play,
+  Sparkles,
+  Star,
+  Target,
+  Terminal,
+  Trophy,
+  Users,
+  Zap,
+} from "lucide-react";
+import problems from "@/lib/problems.json";
+import { ProblemCard } from "./problem-card";
 
 function HeroEditor() {
-  return <div className="hero-visual" aria-label="JavaScript coding challenge preview"><div className="visual-grid" /><div className="editor-orbit orbit-one" /><div className="editor-orbit orbit-two" /><div className="floating-chip chip-top"><span className="mini-icon"><Zap size={15} /></span>One problem. A better you.</div><div className="hero-editor"><div className="editor-titlebar"><div className="window-dots"><i /><i /><i /></div><span><Code2 size={13} /> two-sum.js</span><span className="language-label">JavaScript</span></div><div className="editor-breadcrumb">problems <ChevronRight size={11} /> arrays <ChevronRight size={11} /> <span>two-sum.js</span></div><div className="code-preview"><div className="line-numbers">{Array.from({ length: 13 }, (_, i) => <span key={i}>{i + 1}</span>)}</div><pre><code><span className="code-comment">{'// A little logic. A lot of possibility.'}</span>{'\n'}<span className="code-purple">function</span>{' '}<span className="code-blue">twoSum</span>{'(nums, target) {\n  '}<span className="code-purple">const</span>{' seen = '}<span className="code-purple">new</span>{' '}<span className="code-yellow">Map</span>{'();\n\n  '}<span className="code-purple">for</span>{' ('}<span className="code-purple">let</span>{' i = '}<span className="code-orange">0</span>{'; i < nums.length; i++) {\n    '}<span className="code-purple">const</span>{' complement = target - nums[i];\n    '}<span className="code-purple">if</span>{' (seen.'}<span className="code-blue">has</span>{'(complement)) {\n      '}<span className="code-purple">return</span>{' [seen.'}<span className="code-blue">get</span>{'(complement), i];\n    }\n    seen.'}<span className="code-blue">set</span>{'(nums[i], i);\n  }\n}'}</code></pre></div><div className="editor-status"><span><GitBranch size={12} /> main</span><span><span className="status-dot" /> All changes saved <span className="code-muted">UTF-8</span></span></div></div><div className="passed-chip"><span className="passed-check"><Check size={19} /></span><div><strong>All test cases passed</strong><span>3 / 3 passed <i /> You&apos;ve got this.</span></div><Sparkles size={17} /></div><span className="visual-caption"><span /> LESS SCROLLING. MORE SOLVING.</span></div>
+  return (
+    <div
+      className="hero-visual"
+      aria-label="JavaScript coding challenge preview"
+    >
+      <div className="visual-grid" />
+      <div className="editor-orbit orbit-one" />
+      <div className="editor-orbit orbit-two" />
+      <div className="floating-chip chip-top">
+        <span className="mini-icon">
+          <Zap size={15} />
+        </span>
+        One problem. A better you.
+      </div>
+      <div className="hero-editor">
+        <div className="editor-titlebar">
+          <div className="window-dots">
+            <i />
+            <i />
+            <i />
+          </div>
+          <span>
+            <Code2 size={13} /> two-sum.js
+          </span>
+          <span className="language-label">JavaScript</span>
+        </div>
+        <div className="editor-breadcrumb">
+          problems <ChevronRight size={11} /> arrays <ChevronRight size={11} />{" "}
+          <span>two-sum.js</span>
+        </div>
+        <div className="code-preview">
+          <div className="line-numbers">
+            {Array.from({ length: 13 }, (_, i) => (
+              <span key={i}>{i + 1}</span>
+            ))}
+          </div>
+          <pre>
+            <code>
+              <span className="code-comment">
+                {"// A little logic. A lot of possibility."}
+              </span>
+              {"\n"}
+              <span className="code-purple">function</span>{" "}
+              <span className="code-blue">twoSum</span>
+              {"(nums, target) {\n  "}
+              <span className="code-purple">const</span>
+              {" seen = "}
+              <span className="code-purple">new</span>{" "}
+              <span className="code-yellow">Map</span>
+              {"();\n\n  "}
+              <span className="code-purple">for</span>
+              {" ("}
+              <span className="code-purple">let</span>
+              {" i = "}
+              <span className="code-orange">0</span>
+              {"; i < nums.length; i++) {\n    "}
+              <span className="code-purple">const</span>
+              {" complement = target - nums[i];\n    "}
+              <span className="code-purple">if</span>
+              {" (seen."}
+              <span className="code-blue">has</span>
+              {"(complement)) {\n      "}
+              <span className="code-purple">return</span>
+              {" [seen."}
+              <span className="code-blue">get</span>
+              {"(complement), i];\n    }\n    seen."}
+              <span className="code-blue">set</span>
+              {"(nums[i], i);\n  }\n}"}
+            </code>
+          </pre>
+        </div>
+        <div className="editor-status">
+          <span>
+            <GitBranch size={12} /> main
+          </span>
+          <span>
+            <span className="status-dot" /> All changes saved{" "}
+            <span className="code-muted">UTF-8</span>
+          </span>
+        </div>
+      </div>
+      <div className="passed-chip">
+        <span className="passed-check">
+          <Check size={19} />
+        </span>
+        <div>
+          <strong>All test cases passed</strong>
+          <span>
+            3 / 3 passed <i /> You&apos;ve got this.
+          </span>
+        </div>
+        <Sparkles size={17} />
+      </div>
+      <span className="visual-caption">
+        <span /> LESS SCROLLING. MORE SOLVING.
+      </span>
+    </div>
+  );
 }
-const categories = [{ name: 'Arrays', icon: Layers3, text: 'Build your foundation', color: 'purple' }, { name: 'Strings', icon: Braces, text: 'Connect the characters', color: 'cyan' }, { name: 'Dynamic Programming', icon: GitBranch, text: 'Break it down. Build it up.', color: 'orange' }, { name: 'Stacks', icon: ListTree, text: 'Take it from the top', color: 'green' }]
+const categories = [
+  {
+    name: "Arrays",
+    icon: Layers3,
+    text: "Build your foundation",
+    color: "purple",
+  },
+  {
+    name: "Strings",
+    icon: Braces,
+    text: "Connect the characters",
+    color: "cyan",
+  },
+  {
+    name: "Dynamic Programming",
+    icon: GitBranch,
+    text: "Break it down. Build it up.",
+    color: "orange",
+  },
+  {
+    name: "Stacks",
+    icon: ListTree,
+    text: "Take it from the top",
+    color: "green",
+  },
+];
 export function Home() {
-  return <main className="home-main"><section className="hero"><div className="hero-copy"><div className="hero-pill"><span className="status-dot" /> YOUR NEXT LEVEL STARTS HERE <ChevronRight size={13} /></div><h1>Think. Code.<br /><span>Conquer.</span><span className="hero-cursor">_</span></h1><p>Great developers aren&apos;t born. They&apos;re built.<br className="desktop-break" /> Sharpen your skills, solve real challenges, and become<br className="desktop-break" /> the developer you want to be. One problem at a time.</p><div className="hero-buttons"><Link className="button button-primary" href="/problems">Start solving <ArrowRight size={17} /></Link><Link className="button button-secondary" href="/learn"><Play size={14} /> Explore learning paths</Link></div><div className="hero-proof"><div className="avatar-stack"><span>JD</span><span>AK</span><span>ML</span><span>SK</span></div><div><div className="proof-stars">★★★★★</div><span>Built for developers. Driven by curiosity.</span></div></div></div><HeroEditor /></section><section className="stats-strip" aria-label="Platform highlights"><div><span className="stat-icon purple"><Code2 /></span><div><strong>9<span> and growing</span></strong><p>Handpicked challenges</p></div></div><div><span className="stat-icon cyan"><Target /></span><div><strong>3<span> difficulty levels</span></strong><p>A challenge for every stage</p></div></div><div><span className="stat-icon orange"><Trophy /></span><div><strong>100%<span> free to learn</span></strong><p>Your ambition. No limits.</p></div></div><div><span className="stat-icon green"><Terminal /></span><div><strong>Real<span> code execution</span></strong><p>Learn by actually doing</p></div></div></section><section className="home-section"><div className="section-heading"><div><div className="eyebrow"><span /> THE NEXT STEP IS YOURS</div><h2>A small challenge. A big step forward.</h2><p>Handpicked problems to get you thinking and keep you growing.</p></div><Link className="text-link" href="/problems">View all problems <ArrowRight size={15} /></Link></div><div className="featured-grid">{problems.slice(0, 3).map((p, i) => <ProblemCard key={p.id} problem={p} index={i} />)}</div></section><section className="home-section categories-section"><div className="section-heading"><div><h2>Find your focus.</h2><p>Go deep on a topic. Turn your weak spots into superpowers.</p></div><Link className="text-link" href="/problems">Explore topics <ArrowRight size={15} /></Link></div><div className="category-grid">{categories.map(({ name, icon: Icon, text, color }) => <Link className="category-card" key={name} href={`/problems?category=${encodeURIComponent(name)}`}><span className={`category-icon ${color}`}><Icon size={23} /></span><div><h3>{name}</h3><p>{text}</p></div><ArrowUpRight size={17} /></Link>)}</div></section><section className="learning-banner"><div className="banner-icon"><BookIcon /></div><div><span className="eyebrow">NEW TO CODING? YOU BELONG HERE.</span><h2>Every expert started with a first line.</h2><p>Build solid foundations with our beginner-friendly learning paths.</p></div><Link className="button button-secondary" href="/learn">Find your starting point <ArrowRight size={16} /></Link></section><div className="bottom-note"><span /><Users size={14} /> No paywalls. No pressure. Just progress.<span /></div></main>
+  return (
+    <main className="home-main">
+      <section className="hero">
+        <div className="hero-copy">
+          <div className="hero-pill">
+            <span className="status-dot" /> YOUR NEXT LEVEL STARTS HERE{" "}
+            <ChevronRight size={13} />
+          </div>
+          <h1>
+            Think. Code.
+            <br />
+            <span>Conquer.</span>
+            <span className="hero-cursor">_</span>
+          </h1>
+          <p>
+            Great developers aren&apos;t born. They&apos;re built.
+            <br className="desktop-break" /> Sharpen your skills, solve real
+            challenges, and become
+            <br className="desktop-break" /> the developer you want to be. One
+            problem at a time.
+          </p>
+          <div className="hero-buttons">
+            <Link className="button button-primary" href="/problems">
+              Start solving <ArrowRight size={17} />
+            </Link>
+            <Link className="button button-secondary" href="/learn">
+              <Play size={14} /> Explore learning paths
+            </Link>
+          </div>
+          <div className="hero-proof">
+            <div className="avatar-stack">
+              <span>JD</span>
+              <span>AK</span>
+              <span>ML</span>
+              <span>SK</span>
+            </div>
+            <div>
+              <div
+                className="proof-stars"
+                aria-hidden="true"
+                style={{ display: "flex", gap: 2 }}
+              >
+                {Array.from({ length: 5 }, (_, i) => (
+                  <Star key={i} size={9} fill="currentColor" />
+                ))}
+              </div>
+              <span>Built for developers. Driven by curiosity.</span>
+            </div>
+          </div>
+        </div>
+        <HeroEditor />
+      </section>
+      <section className="stats-strip" aria-label="Platform highlights">
+        <div>
+          <span className="stat-icon purple">
+            <Code2 />
+          </span>
+          <div>
+            <strong>
+              9<span> and growing</span>
+            </strong>
+            <p>Handpicked challenges</p>
+          </div>
+        </div>
+        <div>
+          <span className="stat-icon cyan">
+            <Target />
+          </span>
+          <div>
+            <strong>
+              3<span> difficulty levels</span>
+            </strong>
+            <p>A challenge for every stage</p>
+          </div>
+        </div>
+        <div>
+          <span className="stat-icon orange">
+            <Trophy />
+          </span>
+          <div>
+            <strong>
+              100%<span> free to learn</span>
+            </strong>
+            <p>Your ambition. No limits.</p>
+          </div>
+        </div>
+        <div>
+          <span className="stat-icon green">
+            <Terminal />
+          </span>
+          <div>
+            <strong>
+              Real<span> code execution</span>
+            </strong>
+            <p>Learn by actually doing</p>
+          </div>
+        </div>
+      </section>
+      <section className="home-section">
+        <div className="section-heading">
+          <div>
+            <div className="eyebrow">
+              <span /> THE NEXT STEP IS YOURS
+            </div>
+            <h2>A small challenge. A big step forward.</h2>
+            <p>Handpicked problems to get you thinking and keep you growing.</p>
+          </div>
+          <Link className="text-link" href="/problems">
+            View all problems <ArrowRight size={15} />
+          </Link>
+        </div>
+        <div className="featured-grid">
+          {problems.slice(0, 3).map((p, i) => (
+            <ProblemCard key={p.id} problem={p} index={i} />
+          ))}
+        </div>
+      </section>
+      <section className="home-section categories-section">
+        <div className="section-heading">
+          <div>
+            <h2>Find your focus.</h2>
+            <p>Go deep on a topic. Turn your weak spots into superpowers.</p>
+          </div>
+          <Link className="text-link" href="/problems">
+            Explore topics <ArrowRight size={15} />
+          </Link>
+        </div>
+        <div className="category-grid">
+          {categories.map(({ name, icon: Icon, text, color }) => (
+            <Link
+              className="category-card"
+              key={name}
+              href={`/problems?category=${encodeURIComponent(name)}`}
+            >
+              <span className={`category-icon ${color}`}>
+                <Icon size={23} />
+              </span>
+              <div>
+                <h3>{name}</h3>
+                <p>{text}</p>
+              </div>
+              <ArrowUpRight size={17} />
+            </Link>
+          ))}
+        </div>
+      </section>
+      <section className="learning-banner">
+        <div className="banner-icon">
+          <BookIcon />
+        </div>
+        <div>
+          <span className="eyebrow">NEW TO CODING? YOU BELONG HERE.</span>
+          <h2>Every expert started with a first line.</h2>
+          <p>
+            Build solid foundations with our beginner-friendly learning paths.
+          </p>
+        </div>
+        <Link className="button button-secondary" href="/learn">
+          Find your starting point <ArrowRight size={16} />
+        </Link>
+      </section>
+      <div className="bottom-note">
+        <span />
+        <Users size={14} /> No paywalls. No pressure. Just progress.
+        <span />
+      </div>
+    </main>
+  );
 }
-function BookIcon() { return <><Code2 size={30} /><span><Check size={12} /></span></> }
+function BookIcon() {
+  return (
+    <>
+      <Code2 size={30} />
+      <span>
+        <Check size={12} />
+      </span>
+    </>
+  );
+}

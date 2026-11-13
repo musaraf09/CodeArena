@@ -1,17 +1,165 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useState } from 'react'
-import { ArrowLeft, ArrowRight, CheckCircle2, Lightbulb } from 'lucide-react'
-import courses from '@/lib/courses.json'
-import { useProgress } from '@/lib/progress'
-export function LessonReader({ course }: { course: typeof courses[number] }) {
-  const [index, setIndex] = useState(0)
-  const [answer, setAnswer] = useState<number | null>(null)
-  const { progress, completeLesson } = useProgress()
-  const lesson = course.lessons[index]
-  const correct = answer === lesson.answer
-  const complete = progress.lessons.includes(`${course.id}/${lesson.id}`)
-  function go(next: number) { setIndex(next); setAnswer(null) }
-  return <main className="page-container"><Link className="text-link" href="/learn"><ArrowLeft size={13} /> All learning paths</Link><div className="page-heading" style={{ marginTop: 25 }}><div className="eyebrow">{course.level}</div><h1>{course.title}</h1><p>One idea at a time. You&apos;re building something that lasts.</p></div><div className="lesson-layout"><aside className="lesson-sidebar"><h3>In this learning path</h3>{course.lessons.map((l,i) => <button key={l.id} className={i === index ? 'active' : ''} onClick={() => go(i)} aria-current={i === index ? 'step' : undefined}><span>0{i+1}</span>{l.title}{progress.lessons.includes(`${course.id}/${l.id}`) && <CheckCircle2 size={14} />}</button>)}</aside><article className="lesson-article"><div className="eyebrow">LESSON {index+1} OF {course.lessons.length} · {Math.round(course.minutes / course.lessons.length)} MIN READ</div><h2>{lesson.title}</h2><p>{lesson.intro}</p><h3>{lesson.concept}</h3><p>{lesson.body}</p><pre><code>{lesson.code}</code></pre><div className="hint"><Lightbulb size={15} /><p style={{ margin: '9px 0 0', fontSize: 12 }}>{lesson.takeaway}</p></div><h3>A quick check</h3><p>{lesson.question}</p><fieldset style={{ border: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 9 }}><legend className="sr-only">{lesson.question}</legend>{lesson.options.map((option,i) => <label key={option} className="filter-check" style={{ padding: 12, border: `1px solid ${answer === i ? '#8066b8' : '#292d40'}`, borderRadius: 5, background: answer === i ? '#765aff15' : '#171a28', fontFamily: 'var(--font-code),monospace', fontSize: 10 }}><input type="radio" name="answer" checked={answer === i} onChange={() => setAnswer(i)} />{option}</label>)}</fieldset><p aria-live="polite" style={{ color: answer === null ? '#8b91a9' : correct ? '#67dcb2' : '#edb180', fontSize: 11 }}>{answer === null ? 'Choose an answer to complete this lesson.' : correct ? 'Exactly right. You’re ready for the next step.' : 'Not quite — revisit the example and give it another try.'}</p><div className="lesson-bottom"><span>{complete ? '✓ Lesson completed' : `${index+1} / ${course.lessons.length} lessons`}</span>{index < course.lessons.length - 1 ? <button disabled={!correct && !complete} className="button button-primary" onClick={() => { completeLesson(`${course.id}/${lesson.id}`); go(index+1) }}>Complete & continue <ArrowRight size={14} /></button> : <button disabled={!correct && !complete} className="button button-primary" onClick={() => completeLesson(`${course.id}/${lesson.id}`)}>{complete ? <><CheckCircle2 size={14} /> Lesson complete</> : <>Complete lesson <CheckCircle2 size={14} /></>}</button>}</div>{index === course.lessons.length - 1 && complete && <div className="practice-callout"><div><h3>Now make it yours.</h3><p>Put what you learned into practice.</p></div><Link className="button button-secondary" href={`/problems/${course.problem}`}>Try a challenge <ArrowRight size={13} /></Link></div>}</article></div></main>
+import Link from "next/link";
+import { useState } from "react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Lightbulb } from "lucide-react";
+import courses from "@/lib/courses.json";
+import { useProgress } from "@/lib/progress";
+export function LessonReader({ course }: { course: (typeof courses)[number] }) {
+  const [index, setIndex] = useState(0);
+  const [answer, setAnswer] = useState<number | null>(null);
+  const { progress, completeLesson } = useProgress();
+  const lesson = course.lessons[index];
+  const correct = answer === lesson.answer;
+  const complete = progress.lessons.includes(`${course.id}/${lesson.id}`);
+  function go(next: number) {
+    setIndex(next);
+    setAnswer(null);
+  }
+  return (
+    <main className="page-container">
+      <Link className="text-link" href="/learn">
+        <ArrowLeft size={13} /> All learning paths
+      </Link>
+      <div className="page-heading" style={{ marginTop: 25 }}>
+        <div className="eyebrow">{course.level}</div>
+        <h1>{course.title}</h1>
+        <p>One idea at a time. You&apos;re building something that lasts.</p>
+      </div>
+      <div className="lesson-layout">
+        <aside className="lesson-sidebar">
+          <h3>In this learning path</h3>
+          {course.lessons.map((l, i) => (
+            <button
+              key={l.id}
+              className={i === index ? "active" : ""}
+              onClick={() => go(i)}
+              aria-current={i === index ? "step" : undefined}
+            >
+              <span>0{i + 1}</span>
+              {l.title}
+              {progress.lessons.includes(`${course.id}/${l.id}`) && (
+                <CheckCircle2 size={14} />
+              )}
+            </button>
+          ))}
+        </aside>
+        <article className="lesson-article">
+          <div className="eyebrow">
+            LESSON {index + 1} OF {course.lessons.length} ·{" "}
+            {Math.round(course.minutes / course.lessons.length)} MIN READ
+          </div>
+          <h2>{lesson.title}</h2>
+          <p>{lesson.intro}</p>
+          <h3>{lesson.concept}</h3>
+          <p>{lesson.body}</p>
+          <pre>
+            <code>{lesson.code}</code>
+          </pre>
+          <div className="hint">
+            <Lightbulb size={15} />
+            <p style={{ margin: "9px 0 0", fontSize: 12 }}>{lesson.takeaway}</p>
+          </div>
+          <h3>A quick check</h3>
+          <p>{lesson.question}</p>
+          <fieldset
+            style={{
+              border: 0,
+              padding: 0,
+              display: "flex",
+              flexDirection: "column",
+              gap: 9,
+            }}
+          >
+            <legend className="sr-only">{lesson.question}</legend>
+            {lesson.options.map((option, i) => (
+              <label
+                key={option}
+                className="filter-check"
+                style={{
+                  padding: 12,
+                  border: `1px solid ${answer === i ? "#8066b8" : "#292d40"}`,
+                  borderRadius: 5,
+                  background: answer === i ? "#765aff15" : "#171a28",
+                  fontFamily: "var(--font-code),monospace",
+                  fontSize: 10,
+                }}
+              >
+                <input
+                  type="radio"
+                  name="answer"
+                  checked={answer === i}
+                  onChange={() => setAnswer(i)}
+                />
+                {option}
+              </label>
+            ))}
+          </fieldset>
+          <p
+            aria-live="polite"
+            style={{
+              color:
+                answer === null ? "#8b91a9" : correct ? "#67dcb2" : "#edb180",
+              fontSize: 11,
+            }}
+          >
+            {answer === null
+              ? "Choose an answer to complete this lesson."
+              : correct
+                ? "Exactly right. You’re ready for the next step."
+                : "Not quite — revisit the example and give it another try."}
+          </p>
+          <div className="lesson-bottom">
+            <span>
+              {complete
+                ? "✓ Lesson completed"
+                : `${index + 1} / ${course.lessons.length} lessons`}
+            </span>
+            {index < course.lessons.length - 1 ? (
+              <button
+                disabled={!correct && !complete}
+                className="button button-primary"
+                onClick={() => {
+                  completeLesson(`${course.id}/${lesson.id}`);
+                  go(index + 1);
+                }}
+              >
+                Complete & continue <ArrowRight size={14} />
+              </button>
+            ) : (
+              <button
+                disabled={!correct && !complete}
+                className="button button-primary"
+                onClick={() => completeLesson(`${course.id}/${lesson.id}`)}
+              >
+                {complete ? (
+                  <>
+                    <CheckCircle2 size={14} /> Lesson complete
+                  </>
+                ) : (
+                  <>
+                    Complete lesson <CheckCircle2 size={14} />
+                  </>
+                )}
+              </button>
+            )}
+          </div>
+          {index === course.lessons.length - 1 && complete && (
+            <div className="practice-callout">
+              <div>
+                <h3>Now make it yours.</h3>
+                <p>Put what you learned into practice.</p>
+              </div>
+              <Link
+                className="button button-secondary"
+                href={`/problems/${course.problem}`}
+              >
+                Try a challenge <ArrowRight size={13} />
+              </Link>
+            </div>
+          )}
+        </article>
+      </div>
+    </main>
+  );
 }
