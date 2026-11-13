@@ -45,15 +45,15 @@ Visit the live website to explore CodeArena:
 
 Clone the repository:
 
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/musaraf09/CodeArena.git
 
-Navigate into the project:
+Navigate into the project: CodeArena
 
 cd codearena
 
 Install dependencies:
 
-npm install
+npm install CodeArena
 
 Start the development server:
 
